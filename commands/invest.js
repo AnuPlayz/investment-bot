@@ -46,7 +46,7 @@ const init = async (interaction, client) => {
         const amount = interaction.options.getNumber('amount');
         const percent = interaction.options.getNumber('percent');
         const days = interaction.options.getNumber('days');
-        return amount > 0 && percent > 0 && days > 0;
+        return amount > 1 && percent > 1 && days > 1;
     };
     if (!isValidInput(interaction)) {
         return interaction.reply('Please provide valid non-negative values for amount, percent, and days.');
