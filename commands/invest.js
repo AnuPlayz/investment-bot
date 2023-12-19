@@ -33,20 +33,27 @@ const options = [
         required: true,
         type: USER,
     },
+    {
+        name: 'currency',
+        description: 'The amount invested in what curreny',
+        required: true,
+        type: NUMBER
+    }
 ];
 
-const adminIds = ["1072550831292948561", "1033578354361761892", "960580260829757461", "853875496570978335", "771721736307474433", "866792169288499251"];
+const adminIds = ["1072550831292948561", "1033578354361761892", "960580260829757461", "853875496570978335", "771721736307474433", "866792169288499251", "745857508689576007"];
 let counter = 10000;
 
 
 
 const init = async (interaction, client) => {
-    
+
     const isValidInput = (interaction) => {
         const amount = interaction.options.getNumber('amount');
         const percent = interaction.options.getNumber('percent');
         const days = interaction.options.getNumber('days');
-        return amount > 1 && percent > 1 && days > 1;
+        const currency = interaction.options.getNumber('currency');
+        return amount > 1 && percent > 1 && days > 1 && (currency > 0 && currency <= 2);
     };
     if (!isValidInput(interaction)) {
         return interaction.reply('Please provide valid non-negative values for amount, percent, and days.');
@@ -56,7 +63,8 @@ const init = async (interaction, client) => {
         const currentDate = new Date();
         const days = interaction.options.getNumber('days') * 86400000;
         const newDate = new Date(currentDate.getTime() + days);
-
+        const currency = interaction.options.getNumber('currency');
+        console.log(currency);
         const investor = interaction.options.get('investor').user.id.toString();
 
         const returns = interaction.options.getNumber('amount') + (interaction.options.getNumber('percent') / 100 * interaction.options.getNumber('amount'));
@@ -71,6 +79,13 @@ const init = async (interaction, client) => {
                         investments: [],
                     });
                 }
+                let sign;
+                if (currency == 1) {
+                    sign = '$';
+                }
+                if (currency == 2) {
+                    sign = 'inr';
+                }
 
                 const newInvestment = {
                     investId: counter,
@@ -78,6 +93,7 @@ const init = async (interaction, client) => {
                     returnsAmount: returns,
                     startDate: currentDate,
                     endDate: newDate,
+                    currency: sign,
                 };
 
                 investorInvestments.investments.push(newInvestment);
@@ -106,7 +122,8 @@ const init = async (interaction, client) => {
                     )
                     .addFields(
                         { name: 'Returns Date', value: date, inline: true },
-                        { name: 'ID', value: `<:greentick:1185628472614322186> ${latestInvestment.investId}` }
+                        { name: 'ID', value: `<:greentick:1185628472614322186> ${latestInvestment.investId}`, inline: true },
+                        { name: 'Currency', value: `<:greentick:1185628472614322186> ${latestInvestment.currency}`, inline: true }
                     )
                     .setTimestamp()
                     .setFooter({ text: 'Made by venti2 with love', iconURL: 'https://images-ext-2.discordapp.net/external/3b8tHG7r18zdDpVVLWHED5vnQDoOjPNgdQH90Ri2Ylc/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/1072550831292948561/428c7f28465881d53c9a518d34268f9b.png' });
@@ -115,7 +132,7 @@ const init = async (interaction, client) => {
                 reply.react('<a:PepegaCredit:1185448910706196510>');
             }
             else {
-                let reply = await interaction.reply(`Gambling is better anw investment returns would be approx ${returns} and date when it may mature is ${newDate}`)
+                let reply = await interaction.reply(`Gambling is better anyways , investment returns would be approx ${returns} and date when it may mature is ${newDate}`)
             }
         } catch (error) {
             console.error('Error creating investment:', error);

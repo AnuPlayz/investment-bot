@@ -28,7 +28,7 @@ const options = [
     },
 ];
 
-const adminIds = ["1072550831292948561", "1033578354361761892", "960580260829757461", "853875496570978335", "771721736307474433", "866792169288499251"];
+const adminIds = ["1072550831292948561", "1033578354361761892", "960580260829757461", "853875496570978335", "771721736307474433", "866792169288499251", "745857508689576007"];
 
 const init = async (interaction, client) => {
     try {
@@ -55,7 +55,8 @@ const init = async (interaction, client) => {
                     )
                     .addFields(
                         { name: 'Returns Date', value: date, inline: true },
-                        { name: 'ID', value: `<:greentick:1185628472614322186> ${investments[index].investId}` }
+                        { name: 'ID', value: `<:greentick:1185628472614322186> ${investments[index].investId}`, inline: true },
+                        { name: 'Currency', value: `<:greentick:1185628472614322186> ${investments[index].currency}`, inline: true }
                     )
                     .setTimestamp()
                     .setFooter({ text: 'Made by venti2 with love', iconURL: 'https://images-ext-2.discordapp.net/external/3b8tHG7r18zdDpVVLWHED5vnQDoOjPNgdQH90Ri2Ylc/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/1072550831292948561/428c7f28465881d53c9a518d34268f9b.png' });
@@ -89,7 +90,8 @@ const init = async (interaction, client) => {
                             )
                             .addFields(
                                 { name: 'Returns Date', value: date, inline: true },
-                                { name: 'ID', value: `<:greentick:1185628472614322186> ${investments[index].investId}` }
+                                { name: 'ID', value: `<:greentick:1185628472614322186> ${investments[index].investId}`, inline: true },
+                                { name: 'Currency', value: `<:greentick:1185628472614322186> ${investments[index].currency}`, inline: true }
                             )
                             .setTimestamp()
                             .setFooter({ text: 'Made by venti2 with love', iconURL: 'https://images-ext-2.discordapp.net/external/3b8tHG7r18zdDpVVLWHED5vnQDoOjPNgdQH90Ri2Ylc/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/1072550831292948561/428c7f28465881d53c9a518d34268f9b.png' });

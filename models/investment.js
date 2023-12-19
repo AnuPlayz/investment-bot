@@ -10,6 +10,7 @@ const investmentSchema = new Schema({
         returnsAmount: { type: Number },
         startDate: { type: Date },
         endDate: { type: Date },
+        currency: { type: String, enum: ['$', 'inr'] }
     }]
 });
 
