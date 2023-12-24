@@ -129,7 +129,6 @@ const init = async (interaction, client) => {
                     .setFooter({ text: 'Made by venti2 with love', iconURL: 'https://images-ext-2.discordapp.net/external/3b8tHG7r18zdDpVVLWHED5vnQDoOjPNgdQH90Ri2Ylc/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/1072550831292948561/428c7f28465881d53c9a518d34268f9b.png' });
 
                 let reply = await interaction.reply({ embeds: [Embed], fetchReply: true });
-                reply.react('<a:PepegaCredit:1185448910706196510>');
             }
             else {
                 let reply = await interaction.reply(`Gambling is better anyways , investment returns would be approx ${returns} and date when it may mature is ${newDate}`)
